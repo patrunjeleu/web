@@ -1,0 +1,81 @@
+SPARQL QUERIES FOR VACATION RECOMMENDATION ONTOLOGY
+====================================================
+
+QUERY 1: Get all users with their budget and preferred activity
+----------------------------------------------------------------
+PREFIX vac: <http://www.vacation.com/ontology#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+
+SELECT ?user ?firstName ?lastName ?budget ?preferredActivity
+WHERE {
+  ?user rdf:type vac:User .
+  ?user vac:firstName ?firstName .
+  ?user vac:lastName ?lastName .
+  ?user vac:budget ?budget .
+  ?user vac:preferredActivity ?preferredActivity .
+}
+ORDER BY ?budget
+
+Description: This query retrieves all users in the system along with their personal
+information (name, budget, and preferred activity). Results are sorted by budget
+in ascending order. This is useful for understanding the user base and their
+travel preferences.
+
+
+QUERY 2: Get all destinations with their activities and budget
+---------------------------------------------------------------
+PREFIX vac: <http://www.vacation.com/ontology#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+
+SELECT ?destination ?name ?budget ?duration ?activity
+WHERE {
+  ?destination rdf:type vac:Destination .
+  ?destination vac:name ?name .
+  ?destination vac:budget ?budget .
+  ?destination vac:duration ?duration .
+  ?destination vac:hasActivity ?activity .
+}
+ORDER BY ?budget
+
+Description: This query lists all vacation destinations with their properties
+(name, budget, duration) and associated activities. Results are ordered by
+budget to help identify affordable options. This query is essential for
+browsing available destinations and understanding what activities each offers.
+
+
+QUERY 3: Get recommendations with user and destination details
+---------------------------------------------------------------
+PREFIX vac: <http://www.vacation.com/ontology#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+
+SELECT ?recommendation ?userName ?userLastName ?destinationName
+       ?matchesBudget ?matchesAvailability ?matchesActivity
+WHERE {
+  ?recommendation rdf:type vac:Recommendation .
+  ?recommendation vac:forUser ?user .
+  ?recommendation vac:recommendsDestination ?destination .
+
+  ?user vac:firstName ?userName .
+  ?user vac:lastName ?userLastName .
+  ?destination vac:name ?destinationName .
+
+  OPTIONAL { ?recommendation vac:matchesBudget ?matchesBudget }
+  OPTIONAL { ?recommendation vac:matchesAvailability ?matchesAvailability }
+  OPTIONAL { ?recommendation vac:matchesPreferredActivity ?matchesActivity }
+}
+
+Description: This query retrieves all recommendations in the system, showing
+which destinations are recommended to which users. It includes the matching
+criteria (budget, availability, preferred activity) that justify each
+recommendation. This is the core query for understanding how the recommendation
+system works and validating that destinations match user preferences.
+
+
+ADDITIONAL NOTES FOR PROTÉGÉ/GRAPHDB EXECUTION:
+-----------------------------------------------
+- Load the vacation-ontology.owl file into Protégé or GraphDB before running queries
+- For Protégé: Use the SPARQL Query tab (Window > Tabs > SPARQL Query)
+- For GraphDB: Create a repository and import the OWL file, then use the SPARQL tab
+- These queries work with both the asserted ontology and the inferred ontology
+- After running a reasoner, additional implicit relationships may be discovered
+- Screenshot the results window showing the query execution and results table

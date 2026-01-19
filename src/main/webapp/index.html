@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Système de Recommandation de Vacances - SW 2025</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+</head>
+<body>
+    <header>
+        <h1>🌍 Système de Recommandation de Destinations de Vacances</h1>
+        <p class="subtitle">Projet SW 2025 - Technologies Web Sémantiques</p>
+    </header>
+
+    <nav>
+        <button class="nav-btn active" onclick="showSection('part1')">Partie 1: XML</button>
+        <button class="nav-btn" onclick="showSection('part2')">Partie 2: RDF/OWL</button>
+    </nav>
+
+    <main>
+        <!-- PART 1: XML -->
+        <section id="part1" class="section active">
+            <h2>Partie 1: Gestion XML des Destinations</h2>
+
+            <!-- Task 4: Add Destination Form -->
+            <div class="card">
+                <h3>📝 Tâche 4: Ajouter une Nouvelle Destination</h3>
+                <form id="addDestinationForm" class="form">
+                    <div class="form-group">
+                        <label>Nom:</label>
+                        <input type="text" id="destName" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Description:</label>
+                        <textarea id="destDescription" required></textarea>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Durée (jours):</label>
+                            <input type="number" id="destDuration" min="1" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Budget (€):</label>
+                            <input type="number" id="destBudget" min="1" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Activité 1:</label>
+                            <input type="text" id="destActivity1" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Activité 2:</label>
+                            <input type="text" id="destActivity2" required>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Ajouter la Destination</button>
+                </form>
+                <div id="addDestResult" class="result"></div>
+            </div>
+
+            <!-- Task 5: Add User Form -->
+            <div class="card">
+                <h3>👤 Tâche 5: Ajouter un Nouvel Utilisateur</h3>
+                <form id="addUserForm" class="form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Prénom:</label>
+                            <input type="text" id="userFirstName" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Nom:</label>
+                            <input type="text" id="userLastName" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Disponibilité (jours):</label>
+                            <input type="number" id="userAvailability" min="1" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Budget (€):</label>
+                            <input type="number" id="userBudget" min="1" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Activité préférée:</label>
+                        <input type="text" id="userActivity" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Ajouter l'Utilisateur</button>
+                </form>
+                <div id="addUserResult" class="result"></div>
+            </div>
+
+            <!-- Task 6: Destinations by Budget -->
+            <div class="card">
+                <h3>💰 Tâche 6: Destinations par Budget</h3>
+                <div class="form">
+                    <div class="form-group">
+                        <label>Budget maximum (€):</label>
+                        <input type="number" id="budgetFilter" min="1" value="700">
+                        <button class="btn btn-secondary" onclick="filterByBudget()">Rechercher</button>
+                    </div>
+                </div>
+                <div id="budgetResults" class="results-grid"></div>
+            </div>
+
+            <!-- Task 7: Recommended Destinations -->
+            <div class="card">
+                <h3>⭐ Tâche 7: Recommandations (2/3 critères)</h3>
+                <button class="btn btn-secondary" onclick="getRecommendations()">Obtenir Recommandations</button>
+                <div id="recommendedResults" class="results-grid"></div>
+            </div>
+
+            <!-- Task 8: XSLT Transformation -->
+            <div class="card">
+                <h3>🎨 Tâche 8: Affichage XSL avec Couleurs</h3>
+                <button class="btn btn-secondary" onclick="showXSLTTransform()">Afficher avec XSLT</button>
+                <div id="xsltResult"></div>
+            </div>
+
+            <!-- Task 9: Destination Details -->
+            <div class="card">
+                <h3>🔍 Tâche 9: Détails d'une Destination</h3>
+                <div class="form">
+                    <div class="form-group">
+                        <label>Nom de la destination:</label>
+                        <select id="destNameSelect" class="select">
+                            <option value="">-- Sélectionner --</option>
+                        </select>
+                        <button class="btn btn-secondary" onclick="getDestinationDetails()">Voir Détails</button>
+                    </div>
+                </div>
+                <div id="destDetailsResult"></div>
+            </div>
+
+            <!-- Task 10: Destinations by Activity -->
+            <div class="card">
+                <h3>🏃 Tâche 10: Destinations par Activité</h3>
+                <div class="form">
+                    <div class="form-group">
+                        <label>Choisir une activité:</label>
+                        <select id="activitySelect" class="select">
+                            <option value="">-- Sélectionner --</option>
+                        </select>
+                        <button class="btn btn-secondary" onclick="filterByActivity()">Rechercher</button>
+                    </div>
+                </div>
+                <div id="activityResults" class="results-grid"></div>
+            </div>
+        </section>
+
+        <!-- PART 2: RDF/OWL -->
+        <section id="part2" class="section">
+            <h2>Partie 2: RDF, OWL et Ontologies</h2>
+
+            <!-- Task 2: Upload and Visualize RDF -->
+            <div class="card">
+                <h3>📤 Tâche 2: Télécharger et Visualiser RDF</h3>
+                <form id="uploadRDFForm" class="form">
+                    <div class="form-group">
+                        <label>Fichier RDF/XML:</label>
+                        <input type="file" id="rdfFile" accept=".rdf,.xml" required>
+                        <button type="submit" class="btn btn-primary">Télécharger et Visualiser</button>
+                    </div>
+                </form>
+                <div id="uploadResult" class="result"></div>
+                <div id="graphContainer">
+                    <h4>Graphe RDF:</h4>
+                    <svg id="rdfGraph" width="800" height="600"></svg>
+                </div>
+            </div>
+
+            <!-- Task 3: Add/Modify Destination in RDF -->
+            <div class="card">
+                <h3>✏️ Tâche 3: Ajouter/Modifier Destination RDF</h3>
+                <div class="tabs">
+                    <button class="tab-btn active" onclick="showTab('add')">Ajouter</button>
+                    <button class="tab-btn" onclick="showTab('modify')">Modifier</button>
+                </div>
+
+                <div id="addTab" class="tab-content active">
+                    <form id="addRDFDestForm" class="form">
+                        <div class="form-group">
+                            <label>Nom:</label>
+                            <input type="text" id="rdfDestName" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Description:</label>
+                            <textarea id="rdfDestDescription" required></textarea>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Budget (€):</label>
+                                <input type="number" id="rdfDestBudget" min="1" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Durée (jours):</label>
+                                <input type="number" id="rdfDestDuration" min="1" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Activité 1:</label>
+                                <input type="text" id="rdfActivity1" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Activité 2:</label>
+                                <input type="text" id="rdfActivity2" required>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Ajouter à RDF</button>
+                    </form>
+                    <div id="addRDFResult" class="result"></div>
+                </div>
+
+                <div id="modifyTab" class="tab-content">
+                    <form id="modifyRDFForm" class="form">
+                        <div class="form-group">
+                            <label>URI de la destination:</label>
+                            <input type="text" id="modifyURI" required>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Propriété:</label>
+                                <select id="modifyProperty" required>
+                                    <option value="name">Nom</option>
+                                    <option value="description">Description</option>
+                                    <option value="budget">Budget</option>
+                                    <option value="duration">Durée</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Nouvelle valeur:</label>
+                                <input type="text" id="modifyValue" required>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Modifier</button>
+                    </form>
+                    <div id="modifyRDFResult" class="result"></div>
+                </div>
+            </div>
+
+            <!-- Task 4: Display All RDF Destinations -->
+            <div class="card">
+                <h3>📋 Tâche 4: Liste des Destinations RDF</h3>
+                <button class="btn btn-secondary" onclick="loadRDFDestinations()">Charger Destinations</button>
+                <div id="rdfDestinationsList" class="results-grid"></div>
+            </div>
+
+            <!-- Task 5: Query Destination Requirements -->
+            <div class="card">
+                <h3>🔎 Tâche 5: Exigences d'une Destination</h3>
+                <div class="form">
+                    <div class="form-group">
+                        <label>Nom de la destination:</label>
+                        <input type="text" id="reqDestName" value="Roumanie">
+                        <button class="btn btn-secondary" onclick="queryRequirements()">Interroger</button>
+                    </div>
+                </div>
+                <div id="requirementsText" class="result"></div>
+                <div id="requirementsGraph">
+                    <h4>Graphe avec Nœuds Colorés:</h4>
+                    <svg id="highlightGraph" width="800" height="600"></svg>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>Projet SW 2025 - Système de Recommandation de Vacances</p>
+        <p>Technologies: XML, XSD, XSLT, XPath, XQuery, RDF, JENA, OWL, SPARQL</p>
+    </footer>
+
+    <script src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           elementFormDefault="qualified">
+
+    <!-- Root element -->
+    <xs:element name="vacationData">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="users" type="UsersType" minOccurs="1" maxOccurs="1"/>
+                <xs:element name="destinations" type="DestinationsType" minOccurs="1" maxOccurs="1"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <!-- Users Type -->
+    <xs:complexType name="UsersType">
+        <xs:sequence>
+            <xs:element name="user" type="UserType" minOccurs="1" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- User Type -->
+    <xs:complexType name="UserType">
+        <xs:sequence>
+            <xs:element name="firstName" type="xs:string"/>
+            <xs:element name="lastName" type="xs:string"/>
+            <xs:element name="availability" type="xs:positiveInteger">
+                <xs:annotation>
+                    <xs:documentation>Number of days available</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="preferredActivity" type="xs:string"/>
+            <xs:element name="budget" type="xs:decimal">
+                <xs:annotation>
+                    <xs:documentation>Budget in euros</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+        <xs:attribute name="id" type="xs:positiveInteger" use="required"/>
+    </xs:complexType>
+
+    <!-- Destinations Type -->
+    <xs:complexType name="DestinationsType">
+        <xs:sequence>
+            <xs:element name="destination" type="DestinationType" minOccurs="1" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- Destination Type -->
+    <xs:complexType name="DestinationType">
+        <xs:sequence>
+            <xs:element name="name" type="xs:string"/>
+            <xs:element name="description" type="xs:string"/>
+            <xs:element name="duration" type="xs:positiveInteger">
+                <xs:annotation>
+                    <xs:documentation>Duration in days</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="activity1" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Primary activity</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="activity2" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Secondary activity</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="budget" type="xs:decimal">
+                <xs:annotation>
+                    <xs:documentation>Budget required in euros</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+        <xs:attribute name="id" type="xs:positiveInteger" use="required"/>
+    </xs:complexType>
+
+</xs:schema>

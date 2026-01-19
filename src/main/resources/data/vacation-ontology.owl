@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE rdf:RDF [
+    <!ENTITY owl "http://www.w3.org/2002/07/owl#" >
+    <!ENTITY xsd "http://www.w3.org/2001/XMLSchema#" >
+    <!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#" >
+    <!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#" >
+    <!ENTITY vac "http://www.vacation.com/ontology#" >
+]>
+<rdf:RDF xmlns="http://www.vacation.com/ontology#"
+     xml:base="http://www.vacation.com/ontology"
+     xmlns:rdf="&rdf;"
+     xmlns:owl="&owl;"
+     xmlns:xsd="&xsd;"
+     xmlns:rdfs="&rdfs;"
+     xmlns:vac="&vac;">
+
+    <owl:Ontology rdf:about="http://www.vacation.com/ontology">
+        <rdfs:label>Vacation Recommendation Ontology</rdfs:label>
+        <rdfs:comment>Ontology for vacation destination recommendation system</rdfs:comment>
+    </owl:Ontology>
+
+    <!-- Classes -->
+
+    <owl:Class rdf:about="&vac;User">
+        <rdfs:label>User</rdfs:label>
+        <rdfs:comment>A person looking for vacation destinations</rdfs:comment>
+    </owl:Class>
+
+    <owl:Class rdf:about="&vac;Destination">
+        <rdfs:label>Destination</rdfs:label>
+        <rdfs:comment>A vacation destination</rdfs:comment>
+    </owl:Class>
+
+    <owl:Class rdf:about="&vac;Activity">
+        <rdfs:label>Activity</rdfs:label>
+        <rdfs:comment>An activity available at a destination</rdfs:comment>
+    </owl:Class>
+
+    <owl:Class rdf:about="&vac;Recommendation">
+        <rdfs:label>Recommendation</rdfs:label>
+        <rdfs:comment>A destination recommendation for a user</rdfs:comment>
+    </owl:Class>
+
+    <!-- Subclasses of User based on budget -->
+    <owl:Class rdf:about="&vac;BudgetTraveler">
+        <rdfs:label>Budget Traveler</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&vac;User"/>
+        <rdfs:comment>User with budget less than 500 euros</rdfs:comment>
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&vac;budget"/>
+                <owl:someValuesFrom>
+                    <rdfs:Datatype>
+                        <owl:onDatatype rdf:resource="&xsd;decimal"/>
+                        <owl:withRestrictions rdf:parseType="Collection">
+                            <rdf:Description>
+                                <xsd:maxInclusive rdf:datatype="&xsd;decimal">500</xsd:maxInclusive>
+                            </rdf:Description>
+                        </owl:withRestrictions>
+                    </rdfs:Datatype>
+                </owl:someValuesFrom>
+            </owl:Restriction>
+        </owl:equivalentClass>
+    </owl:Class>
+
+    <owl:Class rdf:about="&vac;MidRangeTraveler">
+        <rdfs:label>Mid-Range Traveler</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&vac;User"/>
+        <rdfs:comment>User with budget between 500 and 1000 euros</rdfs:comment>
+    </owl:Class>
+
+    <owl:Class rdf:about="&vac;LuxuryTraveler">
+        <rdfs:label>Luxury Traveler</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&vac;User"/>
+        <rdfs:comment>User with budget over 1000 euros</rdfs:comment>
+    </owl:Class>
+
+    <!-- Subclasses of Destination based on budget -->
+    <owl:Class rdf:about="&vac;AffordableDestination">
+        <rdfs:label>Affordable Destination</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&vac;Destination"/>
+        <rdfs:comment>Destination costing less than 500 euros</rdfs:comment>
+    </owl:Class>
+
+    <owl:Class rdf:about="&vac;MidRangeDestination">
+        <rdfs:label>Mid-Range Destination</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&vac;Destination"/>
+        <rdfs:comment>Destination costing between 500 and 1000 euros</rdfs:comment>
+    </owl:Class>
+
+    <owl:Class rdf:about="&vac;LuxuryDestination">
+        <rdfs:label>Luxury Destination</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&vac;Destination"/>
+        <rdfs:comment>Destination costing over 1000 euros</rdfs:comment>
+    </owl:Class>
+
+    <!-- User eligible for specific destination -->
+    <owl:Class rdf:about="&vac;EligibleForRomania">
+        <rdfs:label>Eligible for Romania</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&vac;User"/>
+        <rdfs:comment>User eligible for Romania destination</rdfs:comment>
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="&vac;User"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="&vac;budget"/>
+                        <owl:someValuesFrom>
+                            <rdfs:Datatype>
+                                <owl:onDatatype rdf:resource="&xsd;decimal"/>
+                                <owl:withRestrictions rdf:parseType="Collection">
+                                    <rdf:Description>
+                                        <xsd:minInclusive rdf:datatype="&xsd;decimal">400</xsd:minInclusive>
+                                    </rdf:Description>
+                                </owl:withRestrictions>
+                            </rdfs:Datatype>
+                        </owl:someValuesFrom>
+                    </owl:Restriction>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="&vac;availability"/>
+                        <owl:someValuesFrom>
+                            <rdfs:Datatype>
+                                <owl:onDatatype rdf:resource="&xsd;integer"/>
+                                <owl:withRestrictions rdf:parseType="Collection">
+                                    <rdf:Description>
+                                        <xsd:minInclusive rdf:datatype="&xsd;integer">4</xsd:minInclusive>
+                                    </rdf:Description>
+                                </owl:withRestrictions>
+                            </rdfs:Datatype>
+                        </owl:someValuesFrom>
+                    </owl:Restriction>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="&vac;preferredActivity"/>
+                        <owl:hasValue>randonnée</owl:hasValue>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+    </owl:Class>
+
+    <!-- Object Properties -->
+
+    <owl:ObjectProperty rdf:about="&vac;hasActivity">
+        <rdfs:label>has activity</rdfs:label>
+        <rdfs:domain rdf:resource="&vac;Destination"/>
+        <rdfs:range rdf:resource="&vac;Activity"/>
+        <rdfs:comment>Links a destination to its available activities</rdfs:comment>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="&vac;primaryActivity">
+        <rdfs:label>primary activity</rdfs:label>
+        <rdfs:subPropertyOf rdf:resource="&vac;hasActivity"/>
+        <rdfs:domain rdf:resource="&vac;Destination"/>
+        <rdfs:range rdf:resource="&vac;Activity"/>
+        <rdfs:comment>The main activity offered by a destination</rdfs:comment>
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="&vac;forUser">
+        <rdfs:label>for user</rdfs:label>
+        <rdfs:domain rdf:resource="&vac;Recommendation"/>
+        <rdfs:range rdf:resource="&vac;User"/>
+        <rdfs:comment>Links a recommendation to the user</rdfs:comment>
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="&vac;recommendsDestination">
+        <rdfs:label>recommends destination</rdfs:label>
+        <rdfs:domain rdf:resource="&vac;Recommendation"/>
+        <rdfs:range rdf:resource="&vac;Destination"/>
+        <rdfs:comment>Links a recommendation to the destination</rdfs:comment>
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="&vac;prefersActivity">
+        <rdfs:label>prefers activity</rdfs:label>
+        <rdfs:domain rdf:resource="&vac;User"/>
+        <rdfs:range rdf:resource="&vac;Activity"/>
+        <rdfs:comment>Links a user to their preferred activity</rdfs:comment>
+    </owl:ObjectProperty>
+
+    <!-- Data Properties -->
+
+    <owl:DatatypeProperty rdf:about="&vac;firstName">
+        <rdfs:label>first name</rdfs:label>
+        <rdfs:domain rdf:resource="&vac;User"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="&vac;lastName">
+        <rdfs:label>last name</rdfs:label>
+        <rdfs:domain rdf:resource="&vac;User"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="&vac;budget">
+        <rdfs:label>budget</rdfs:label>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="&vac;User"/>
+                    <rdf:Description rdf:about="&vac;Destination"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+        <rdfs:range rdf:resource="&xsd;decimal"/>
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:comment>Budget in euros</rdfs:comment>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="&vac;availability">
+        <rdfs:label>availability</rdfs:label>
+        <rdfs:domain rdf:resource="&vac;User"/>
+        <rdfs:range rdf:resource="&xsd;integer"/>
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:comment>Available days for vacation</rdfs:comment>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="&vac;duration">
+        <rdfs:label>duration</rdfs:label>
+        <rdfs:domain rdf:resource="&vac;Destination"/>
+        <rdfs:range rdf:resource="&xsd;integer"/>
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:comment>Duration of vacation in days</rdfs:comment>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="&vac;name">
+        <rdfs:label>name</rdfs:label>
+        <rdfs:domain rdf:resource="&vac;Destination"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="&vac;description">
+        <rdfs:label>description</rdfs:label>
+        <rdfs:domain rdf:resource="&vac;Destination"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="&vac;preferredActivity">
+        <rdfs:label>preferred activity</rdfs:label>
+        <rdfs:domain rdf:resource="&vac;User"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="&vac;activityName">
+        <rdfs:label>activity name</rdfs:label>
+        <rdfs:domain rdf:resource="&vac;Activity"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="&vac;matchesBudget">
+        <rdfs:label>matches budget</rdfs:label>
+        <rdfs:domain rdf:resource="&vac;Recommendation"/>
+        <rdfs:range rdf:resource="&xsd;boolean"/>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="&vac;matchesAvailability">
+        <rdfs:label>matches availability</rdfs:label>
+        <rdfs:domain rdf:resource="&vac;Recommendation"/>
+        <rdfs:range rdf:resource="&xsd;boolean"/>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="&vac;matchesPreferredActivity">
+        <rdfs:label>matches preferred activity</rdfs:label>
+        <rdfs:domain rdf:resource="&vac;Recommendation"/>
+        <rdfs:range rdf:resource="&xsd;boolean"/>
+    </owl:DatatypeProperty>
+
+    <!-- Example Individuals -->
+
+    <owl:NamedIndividual rdf:about="http://www.vacation.com/users/maria-popescu">
+        <rdf:type rdf:resource="&vac;User"/>
+        <vac:firstName>Maria</vac:firstName>
+        <vac:lastName>Popescu</vac:lastName>
+        <vac:budget rdf:datatype="&xsd;decimal">700</vac:budget>
+        <vac:availability rdf:datatype="&xsd;integer">5</vac:availability>
+        <vac:preferredActivity>randonnée</vac:preferredActivity>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://www.vacation.com/destinations/roumanie">
+        <rdf:type rdf:resource="&vac;Destination"/>
+        <vac:name>Roumanie</vac:name>
+        <vac:description>Découvrez les Carpates roumaines</vac:description>
+        <vac:budget rdf:datatype="&xsd;decimal">400</vac:budget>
+        <vac:duration rdf:datatype="&xsd;integer">4</vac:duration>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://www.vacation.com/activities/randonnee">
+        <rdf:type rdf:resource="&vac;Activity"/>
+        <vac:activityName>randonnée</vac:activityName>
+    </owl:NamedIndividual>
+
+</rdf:RDF>

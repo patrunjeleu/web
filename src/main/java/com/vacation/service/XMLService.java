@@ -32,9 +32,9 @@ public class XMLService {
     private void loadXML() {
         try {
             File file = new File(xmlFilePath);
-            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            javax.xml.parsers.DocumentBuilderFactory factory = javax.xml.parsers.DocumentBuilderFactory.newInstance();
             factory.setNamespaceAware(true);
-            DocumentBuilder builder = factory.newDocumentBuilder();
+            javax.xml.parsers.DocumentBuilder builder = factory.newDocumentBuilder();
             document = builder.parse(file);
             document.getDocumentElement().normalize();
         } catch (Exception e) {

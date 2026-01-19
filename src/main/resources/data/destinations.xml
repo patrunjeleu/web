@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vacationData>
+    <users>
+        <user id="1">
+            <firstName>Maria</firstName>
+            <lastName>Popescu</lastName>
+            <availability>5</availability>
+            <preferredActivity>randonnée</preferredActivity>
+            <budget>700</budget>
+        </user>
+    </users>
+    <destinations>
+        <destination id="1">
+            <name>Roumanie</name>
+            <description>Découvrez les Carpates roumaines avec des paysages magnifiques et des sentiers de randonnée exceptionnels.</description>
+            <duration>4</duration>
+            <activity1>randonnée</activity1>
+            <activity2>tourisme</activity2>
+            <budget>400</budget>
+        </destination>
+        <destination id="2">
+            <name>Paris</name>
+            <description>La ville lumière vous offre une expérience gastronomique inoubliable et des monuments historiques.</description>
+            <duration>5</duration>
+            <activity1>tourisme</activity1>
+            <activity2>gastronomie</activity2>
+            <budget>600</budget>
+        </destination>
+        <destination id="3">
+            <name>Alpes Suisses</name>
+            <description>Randonnées spectaculaires dans les Alpes avec des vues panoramiques imprenables.</description>
+            <duration>7</duration>
+            <activity1>randonnée</activity1>
+            <activity2>ski</activity2>
+            <budget>900</budget>
+        </destination>
+        <destination id="4">
+            <name>Costa Brava</name>
+            <description>Profitez des plages magnifiques et de la plongée sous-marine en Espagne.</description>
+            <duration>6</duration>
+            <activity1>plage</activity1>
+            <activity2>plongée</activity2>
+            <budget>550</budget>
+        </destination>
+        <destination id="5">
+            <name>Islande</name>
+            <description>Explorez les glaciers, les geysers et les aurores boréales de l'Islande.</description>
+            <duration>8</duration>
+            <activity1>randonnée</activity1>
+            <activity2>camping</activity2>
+            <budget>1200</budget>
+        </destination>
+        <destination id="6">
+            <name>Norvège</name>
+            <description>Camping dans les fjords norvégiens avec des paysages à couper le souffle.</description>
+            <duration>7</duration>
+            <activity1>camping</activity1>
+            <activity2>randonnée</activity2>
+            <budget>850</budget>
+        </destination>
+        <destination id="7">
+            <name>Pyrénées</name>
+            <description>Randonnées et camping dans les Pyrénées franco-espagnoles.</description>
+            <duration>5</duration>
+            <activity1>randonnée</activity1>
+            <activity2>camping</activity2>
+            <budget>450</budget>
+        </destination>
+        <destination id="8">
+            <name>Croatie</name>
+            <description>Découvrez les parcs nationaux croates et les plages de l'Adriatique.</description>
+            <duration>6</duration>
+            <activity1>randonnée</activity1>
+            <activity2>plage</activity2>
+            <budget>520</budget>
+        </destination>
+        <destination id="9">
+            <name>Toscane</name>
+            <description>Gastronomie italienne et tourisme culturel dans les collines toscanes.</description>
+            <duration>5</duration>
+            <activity1>gastronomie</activity1>
+            <activity2>tourisme</activity2>
+            <budget>680</budget>
+        </destination>
+        <destination id="10">
+            <name>Écosse</name>
+            <description>Randonnées dans les Highlands écossais et découverte des châteaux historiques.</description>
+            <duration>6</duration>
+            <activity1>randonnée</activity1>
+            <activity2>tourisme</activity2>
+            <budget>750</budget>
+        </destination>
+        <destination id="11">
+            <name>Provence</name>
+            <description>Champs de lavande, gastronomie provençale et villages pittoresques.</description>
+            <duration>4</duration>
+            <activity1>gastronomie</activity1>
+            <activity2>tourisme</activity2>
+            <budget>500</budget>
+        </destination>
+        <destination id="12">
+            <name>Grèce</name>
+            <description>Plages paradisiaques et sites archéologiques de la Grèce antique.</description>
+            <duration>7</duration>
+            <activity1>plage</activity1>
+            <activity2>tourisme</activity2>
+            <budget>620</budget>
+        </destination>
+        <destination id="13">
+            <name>Autriche</name>
+            <description>Ski dans les Alpes autrichiennes et culture viennoise.</description>
+            <duration>5</duration>
+            <activity1>ski</activity1>
+            <activity2>tourisme</activity2>
+            <budget>720</budget>
+        </destination>
+        <destination id="14">
+            <name>Portugal</name>
+            <description>Randonnées côtières, surf et découverte de Lisbonne.</description>
+            <duration>6</duration>
+            <activity1>randonnée</activity1>
+            <activity2>surf</activity2>
+            <budget>480</budget>
+        </destination>
+        <destination id="15">
+            <name>Danemark</name>
+            <description>Camping au bord de la mer Baltique et visite de Copenhague.</description>
+            <duration>5</duration>
+            <activity1>camping</activity1>
+            <activity2>tourisme</activity2>
+            <budget>640</budget>
+        </destination>
+        <destination id="16">
+            <name>Pologne</name>
+            <description>Randonnées dans les montagnes Tatras et visite de Cracovie.</description>
+            <duration>5</duration>
+            <activity1>randonnée</activity1>
+            <activity2>tourisme</activity2>
+            <budget>380</budget>
+        </destination>
+        <destination id="17">
+            <name>Irlande</name>
+            <description>Camping le long de la côte ouest irlandaise et culture celtique.</description>
+            <duration>6</duration>
+            <activity1>camping</activity1>
+            <activity2>tourisme</activity2>
+            <budget>580</budget>
+        </destination>
+        <destination id="18">
+            <name>Sardaigne</name>
+            <description>Plages magnifiques, plongée sous-marine et gastronomie sarde.</description>
+            <duration>7</duration>
+            <activity1>plage</activity1>
+            <activity2>plongée</activity2>
+            <budget>670</budget>
+        </destination>
+        <destination id="19">
+            <name>Slovénie</name>
+            <description>Randonnées dans les Alpes Juliennes et découverte de Ljubljana.</description>
+            <duration>5</duration>
+            <activity1>randonnée</activity1>
+            <activity2>tourisme</activity2>
+            <budget>420</budget>
+        </destination>
+        <destination id="20">
+            <name>Finlande</name>
+            <description>Camping en Laponie avec possibilité de voir les aurores boréales.</description>
+            <duration>8</duration>
+            <activity1>camping</activity1>
+            <activity2>randonnée</activity2>
+            <budget>980</budget>
+        </destination>
+        <destination id="21">
+            <name>Bulgarie</name>
+            <description>Randonnées dans les montagnes de Rila et tourisme culturel.</description>
+            <duration>5</duration>
+            <activity1>randonnée</activity1>
+            <activity2>tourisme</activity2>
+            <budget>350</budget>
+        </destination>
+        <destination id="22">
+            <name>Corse</name>
+            <description>Randonnées sur le GR20, camping et plages corses.</description>
+            <duration>7</duration>
+            <activity1>randonnée</activity1>
+            <activity2>camping</activity2>
+            <budget>590</budget>
+        </destination>
+    </destinations>
+</vacationData>

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:vac="http://www.vacation.com/ontology#">
+
+    <!-- Users -->
+    <rdf:Description rdf:about="http://www.vacation.com/users/maria-popescu">
+        <rdf:type rdf:resource="http://www.vacation.com/ontology#User"/>
+        <vac:firstName>Maria</vac:firstName>
+        <vac:lastName>Popescu</vac:lastName>
+        <vac:budget rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">700</vac:budget>
+        <vac:availability rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">5</vac:availability>
+        <vac:preferredActivity>randonnée</vac:preferredActivity>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://www.vacation.com/users/mihai-pavel">
+        <rdf:type rdf:resource="http://www.vacation.com/ontology#User"/>
+        <vac:firstName>Mihai</vac:firstName>
+        <vac:lastName>Pavel</vac:lastName>
+        <vac:budget rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">500</vac:budget>
+        <vac:availability rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">7</vac:availability>
+        <vac:preferredActivity>camping</vac:preferredActivity>
+    </rdf:Description>
+
+    <!-- Destinations -->
+    <rdf:Description rdf:about="http://www.vacation.com/destinations/roumanie">
+        <rdf:type rdf:resource="http://www.vacation.com/ontology#Destination"/>
+        <vac:name>Roumanie</vac:name>
+        <vac:description>Découvrez les Carpates roumaines avec des paysages magnifiques et des sentiers de randonnée exceptionnels.</vac:description>
+        <vac:budget rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">400</vac:budget>
+        <vac:duration rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">4</vac:duration>
+        <vac:hasActivity rdf:resource="http://www.vacation.com/activities/randonnee"/>
+        <vac:hasActivity rdf:resource="http://www.vacation.com/activities/tourisme"/>
+        <vac:primaryActivity rdf:resource="http://www.vacation.com/activities/randonnee"/>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://www.vacation.com/destinations/paris">
+        <rdf:type rdf:resource="http://www.vacation.com/ontology#Destination"/>
+        <vac:name>Paris</vac:name>
+        <vac:description>La ville lumière vous offre une expérience gastronomique inoubliable et des monuments historiques.</vac:description>
+        <vac:budget rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">600</vac:budget>
+        <vac:duration rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">5</vac:duration>
+        <vac:hasActivity rdf:resource="http://www.vacation.com/activities/tourisme"/>
+        <vac:hasActivity rdf:resource="http://www.vacation.com/activities/gastronomie"/>
+        <vac:primaryActivity rdf:resource="http://www.vacation.com/activities/gastronomie"/>
+    </rdf:Description>
+
+    <!-- Activities -->
+    <rdf:Description rdf:about="http://www.vacation.com/activities/randonnee">
+        <rdf:type rdf:resource="http://www.vacation.com/ontology#Activity"/>
+        <vac:activityName>randonnée</vac:activityName>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://www.vacation.com/activities/tourisme">
+        <rdf:type rdf:resource="http://www.vacation.com/ontology#Activity"/>
+        <vac:activityName>tourisme</vac:activityName>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://www.vacation.com/activities/camping">
+        <rdf:type rdf:resource="http://www.vacation.com/ontology#Activity"/>
+        <vac:activityName>camping</vac:activityName>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://www.vacation.com/activities/gastronomie">
+        <rdf:type rdf:resource="http://www.vacation.com/ontology#Activity"/>
+        <vac:activityName>gastronomie</vac:activityName>
+    </rdf:Description>
+
+    <!-- Recommendations -->
+    <rdf:Description rdf:about="http://www.vacation.com/recommendations/maria-roumanie">
+        <rdf:type rdf:resource="http://www.vacation.com/ontology#Recommendation"/>
+        <vac:forUser rdf:resource="http://www.vacation.com/users/maria-popescu"/>
+        <vac:recommendsDestination rdf:resource="http://www.vacation.com/destinations/roumanie"/>
+        <vac:matchesBudget rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</vac:matchesBudget>
+        <vac:matchesAvailability rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</vac:matchesAvailability>
+        <vac:matchesPreferredActivity rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</vac:matchesPreferredActivity>
+    </rdf:Description>
+
+</rdf:RDF>

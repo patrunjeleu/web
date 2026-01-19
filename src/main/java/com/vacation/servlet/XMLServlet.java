@@ -134,10 +134,10 @@ public class XMLServlet extends HttpServlet {
                 // Task 4: Add new destination
                 String name = request.getParameter("name");
                 String description = request.getParameter("description");
-                int duration = Integer.parseInt(request.getParameter("duration"));
+                String durationStr = request.getParameter("duration");
                 String activity1 = request.getParameter("activity1");
                 String activity2 = request.getParameter("activity2");
-                double budget = Double.parseDouble(request.getParameter("budget"));
+                String budgetStr = request.getParameter("budget");
 
                 // Validation
                 if (name == null || name.trim().isEmpty()) {
@@ -145,6 +145,36 @@ public class XMLServlet extends HttpServlet {
                     out.print("{\"error\": \"Name is required\"}");
                     return;
                 }
+                if (description == null || description.trim().isEmpty()) {
+                    response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                    out.print("{\"error\": \"Description is required\"}");
+                    return;
+                }
+                if (durationStr == null || durationStr.trim().isEmpty()) {
+                    response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                    out.print("{\"error\": \"Duration is required\"}");
+                    return;
+                }
+                if (budgetStr == null || budgetStr.trim().isEmpty()) {
+                    response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                    out.print("{\"error\": \"Budget is required\"}");
+                    return;
+                }
+                if (activity1 == null || activity1.trim().isEmpty()) {
+                    response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                    out.print("{\"error\": \"Activity 1 is required\"}");
+                    return;
+                }
+                if (activity2 == null || activity2.trim().isEmpty()) {
+                    response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                    out.print("{\"error\": \"Activity 2 is required\"}");
+                    return;
+                }
+
+                // Parse after validation
+                int duration = Integer.parseInt(durationStr);
+                double budget = Double.parseDouble(budgetStr);
+
                 if (duration <= 0) {
                     response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
                     out.print("{\"error\": \"Duration must be positive\"}");
@@ -168,9 +198,9 @@ public class XMLServlet extends HttpServlet {
                 // Task 5: Add new user
                 String firstName = request.getParameter("firstName");
                 String lastName = request.getParameter("lastName");
-                int availability = Integer.parseInt(request.getParameter("availability"));
+                String availabilityStr = request.getParameter("availability");
                 String preferredActivity = request.getParameter("preferredActivity");
-                double budget = Double.parseDouble(request.getParameter("budget"));
+                String budgetStr = request.getParameter("budget");
 
                 // Validation
                 if (firstName == null || firstName.trim().isEmpty()) {
@@ -183,6 +213,26 @@ public class XMLServlet extends HttpServlet {
                     out.print("{\"error\": \"Last name is required\"}");
                     return;
                 }
+                if (availabilityStr == null || availabilityStr.trim().isEmpty()) {
+                    response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                    out.print("{\"error\": \"Availability is required\"}");
+                    return;
+                }
+                if (budgetStr == null || budgetStr.trim().isEmpty()) {
+                    response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                    out.print("{\"error\": \"Budget is required\"}");
+                    return;
+                }
+                if (preferredActivity == null || preferredActivity.trim().isEmpty()) {
+                    response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                    out.print("{\"error\": \"Preferred activity is required\"}");
+                    return;
+                }
+
+                // Parse after validation
+                int availability = Integer.parseInt(availabilityStr);
+                double budget = Double.parseDouble(budgetStr);
+
                 if (availability <= 0) {
                     response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
                     out.print("{\"error\": \"Availability must be positive\"}");

@@ -26,3 +26,30 @@ Thumbs.db
 *.bak
 *.swp
 *~
+
+# C++ Build directories
+build/
+cmake-build-*/
+out/
+
+# Visual Studio
+.vs/
+*.user
+*.suo
+*.sln
+*.vcxproj*
+
+# C++ Compiled files
+*.o
+*.obj
+*.exe
+*.dll
+*.lib
+*.a
+*.so
+*.dylib
+
+# C++ Dependencies (downloaded by CMake)
+external/glfw/
+external/glad/
+external/glm/
